@@ -1,0 +1,7 @@
+<%= form_for(@product, url: url_for(controller: "products", action: "create")) do |f| %>
+  <%= f.label :name, "Product Name" %>
+  <%= f.text_field :name, required: true %> <br>
+  <%= f.label :category, "Product Category" %>
+  <%= f.text_field :category, required: true %> <br>
+  <%= f.submit %>
+<% end %>
