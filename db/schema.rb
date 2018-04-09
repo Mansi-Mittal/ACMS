@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405034249) do
+ActiveRecord::Schema.define(version: 20180409072934) do
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "Product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["Product_id"], name: "index_carts_on_Product_id"
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
