@@ -1,4 +1,4 @@
-<%= @product.name %><br>
+<%= image_tag @product.image %><br>
 <%= link_to "Add to wishlist", new_wishlist_path(:Product_id => @product.id) %><br>
 <%= link_to "Add to cart", new_cart_path(:Product_id => @product.id) %><br>
 

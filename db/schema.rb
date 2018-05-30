@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409072934) do
+ActiveRecord::Schema.define(version: 20180505040105) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "user_id"
@@ -27,6 +27,12 @@ ActiveRecord::Schema.define(version: 20180409072934) do
     t.integer "qty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.string "user_id"
+    t.string "Image_Url"
   end
 
   create_table "wishlists", force: :cascade do |t|
