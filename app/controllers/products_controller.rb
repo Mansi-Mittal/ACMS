@@ -6,16 +6,18 @@ class ProductsController < ApplicationController
         data = []
         if params[:category]
             products = Product.where("category=?",params[:category])
-        end
-        if params[:user_id]
+        elsif params[:user_id]
             products = Product.where("user_id=?",params[:user_id])
+        else
+            products = Product.all
         end
         products.each do |product|
             info = {}
             info["id"] = product.id
             info["name"] = product.name
-            info["price"] = product.current_price
-            info["Qty"] = product.current_qty
+            info["price"] = product.price
+            info["Qty"] = product.qty
+            info["user_id"] = product.user_id
             info["IMAGE_URL"] = product.image
             data << info
             #data.merge!("": info)
@@ -45,13 +47,21 @@ class ProductsController < ApplicationController
         data = {}
         name = params["name"]
         category = params["category"]
+        subCategory = params["subCategory"]
         img = params["image"]
         price = params["price"]
         brand = params["brand"]
         colour = params["colour"]
         user_id = params["user_id"]
+        #qty = params["Qty"]
+        tags = params["tags"]
+        tagsArray = tags.to_s.strip.split
+        sizes = params["sizes"]
+        qty = params["qty"]
+        sizesArray = sizes.to_s.strip.split
+        qtys = qty.to_s.strip.split
         decodedImg = StringIO.new(Base64.decode64(img))
-    	product = Product.create(name: name, category: category, image: decodedImg, current_price: price, brand: brand, colour: colour,user_id: user_id)
+    	product = Product.create(name: name, category: category, sub_category: subCategory ,image: decodedImg, price: price, brand: brand, colour: colour,user_id: user_id,tags: tagsArray,sizes: sizesArray,qtySize: qtys)
     	if product.save
             product[:Image_Url] = product.image
             #data["image"] = product.image
@@ -92,10 +102,19 @@ class ProductsController < ApplicationController
             info["id"] = product.id
             info["name"] = product.name
             info["IMAGE_URL"] = product.image
+            info["price"] = product.price
+            info["user_id"] = product.user_id
             data << info
             #data.merge!("": info)
         end
         render json: data
+    end
+
+    def sold
+        product_id= params[:Product_id]
+        qty = params[:Qty]
+        product = Product.find(product_id)
+        #if product.
     end
 
     def product_params

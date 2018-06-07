@@ -16,6 +16,12 @@ post '/carts/new' => 'carts#new'
 get '/carts' => 'carts#index'
 
 get '/products/search' => 'products#search'
+post '/carts/remove' => 'carts#destroy'
+post '/wishlists/remove' => 'wishlists#destroy'
+post '/wishlists/find' => 'wishlists#exist'
+post '/carts/find' => 'carts#exist'
+
+post '/products/sold' => 'products#sold'
 
 #post '/paytm/generateChecksum.rb' => 'generate_checksum#unknown'
 
